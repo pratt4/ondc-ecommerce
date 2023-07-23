@@ -21,3 +21,15 @@ First clone the project then
 3.**Start the development server**
 
 `npm run dev`
+
+# For payments
+
+use this test card
+
+card number :4111 1111 1111 1111
+
+cvv :random number
+
+expiry date: some future date
+
+otp : random number (number of digits should be greater than 3)
