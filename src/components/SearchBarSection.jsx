@@ -1,33 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link, useNavigate } from "react-router-dom";
 
-function SearchBarSection({query, setQuery, cartsLength }) {
-  // const [query, setQuery] = useState("");
-  // const [searchInput, setSearchInput] = useState("");
+import AuthContext from "../context/auth.context";
+
+function SearchBarSection({ query, setQuery, cartsLength }) {
+  const { isLoggedIn, onLogout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  
   return (
-    <div className="flex justify-between items-center">
-      <p className="text-2xl cursor-pointer" onClick={() => navigate("/")}>
-        Buyer app POC
+    <div className="flex justify-between items-center py-4 px-8 bg-[#494949]">
+      <p className="text-2xl cursor-pointer text-white" onClick={() => navigate("/")}>
+        ONDC Buyer app POC
       </p>
       <div className="flex gap-5">
         <div className="flex border-[1px] border-slate-300 rounded-l-lg rounded-r-lg ">
           <input
-            className="rounded-l-lg focus:outline-none"
+            className="px-4 py-2 rounded-l-lg focus:outline-none text-white"
             type="search"
             placeholder="Search.."
-            value={query} 
+            value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          {/* <button
-            className="rounded-none rounded-r-lg bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-500 hover:bg-blue-200 hover:border-transparent"
-            onClick={handleGoClick} 
-          >
-            Go
-          </button> */}
         </div>
         <Link
           title="Shopping Carts"
@@ -39,7 +33,16 @@ function SearchBarSection({query, setQuery, cartsLength }) {
             <div className="absolute top-3 right-3 h-[0.5rem] w-[0.5rem] rounded-full bg-red-500"></div>
           )}
         </Link>
-        <p className="text-2xl cursor-pointer" onClick={() => navigate("/auth")}>Sign In</p>
+        <p
+          className="text-1xl cursor-pointer text-white"
+          onClick={() => navigate("/auth")}
+        >
+          {isLoggedIn ? (
+            <button className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600" onClick={onLogout}>Sign Out</button>
+          ) : (
+            <button className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600">Sign In</button>
+          )}
+        </p>
       </div>
     </div>
   );

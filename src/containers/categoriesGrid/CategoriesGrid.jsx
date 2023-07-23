@@ -36,8 +36,8 @@ function CategoriesGrid({ query }) {
   return (
     <>
       
-      <div className="h-1/4 my-5 text-2xl">Categories</div>
-      <div className="grid gap-[2em]" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))" }}>
+      <div className="h-1/4 my-5 text-3xl font-bold">Categories</div>
+      <div className="grid gap-[2em]" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}>
         {filteredCategories.map((category) => (
           <CategoryCard key={category} categoryName={category} />
         ))}

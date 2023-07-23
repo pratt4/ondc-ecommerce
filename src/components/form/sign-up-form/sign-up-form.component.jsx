@@ -6,6 +6,7 @@ import Button from '../button/button.component';
 
 
 
+
 import './sign-up-form.styles.scss';
 
 const defaultFormFields = {
@@ -23,29 +24,22 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (password !== confirmPassword) {
-      alert('passwords do not match');
-      return;
+  
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+  
+    const existingUser = users.find((user) => user.email === email);
+  
+    if (existingUser) {
+      alert("Email already in use");
+    } else {
+      users.push({ email, password });
+      localStorage.setItem("users", JSON.stringify(users));
+      alert("Account created successfully");
     }
-
-    try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await createUserDocumentFromAuth(user, { displayName });
-      resetFormFields();
-    } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        alert('Cannot create user, email already in use');
-      } else {
-        console.log('user creation encountered an error', error);
-      }
-    }
+  
+    resetFormFields();
   };
 
   const handleChange = (event) => {
@@ -55,9 +49,10 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className='sign-up-container'>
-      <h2>Don't have an account?</h2>
-      <span>Sign up with your email and password</span>
+    <div className='sign-up-container  '>
+      
+      <h2 className='text-xl font-bold'>Don't have an account?</h2>
+      <span className='text-xl font-bold'>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label='Display Name'

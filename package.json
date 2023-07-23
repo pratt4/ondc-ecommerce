@@ -20,7 +20,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "sass": "^1.64.0",
-    "styled-components": "^6.0.4",
+    "styled-components": "^6.0.5",
     "zustand": "^4.3.7"
   },
   "devDependencies": {

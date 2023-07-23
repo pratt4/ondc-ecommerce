@@ -30,6 +30,7 @@ function PlaceOrder() {
         description:"testing",
         handler:function(response){
           alert("ORDER PLACED SUCCESSFULLY ");
+          navigate("/");
         },
         prefill:{
           name:"test",
