@@ -3,10 +3,7 @@ import { useState } from 'react';
 
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
-
-
-
-
+import AuthContext from "../../../context/auth.context";
 import './sign-up-form.styles.scss';
 
 const defaultFormFields = {
@@ -16,7 +13,7 @@ const defaultFormFields = {
   confirmPassword: '',
 };
 
-const SignUpForm = () => {
+const SignUpForm = ({setIsLogin}) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -32,11 +29,11 @@ const SignUpForm = () => {
     const existingUser = users.find((user) => user.email === email);
   
     if (existingUser) {
-      alert("Email already in use");
+      toast.warn("Email already in use");
     } else {
       users.push({ email, password });
       localStorage.setItem("users", JSON.stringify(users));
-      alert("Account created successfully");
+      toast.success("Account created successfully");
     }
   
     resetFormFields();
@@ -51,8 +48,7 @@ const SignUpForm = () => {
   return (
     <div className='sign-up-container  '>
       
-      <h2 className='text-xl font-bold'>Don't have an account?</h2>
-      <span className='text-xl font-bold'>Sign up with your email and password</span>
+      <span className='text-xl font-bold'>Create an account here</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label='Display Name'
@@ -91,6 +87,8 @@ const SignUpForm = () => {
         />
         <Button type='submit'>Sign Up</Button>
       </form>
+      <p className="cursor-pointer"
+      onClick={()=>setIsLogin((prev)=>!prev)}>Already have an account? Log in</p>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
-
+//import { useAuth } from "../hooks/useAuth";
+import { createContext, useContext, useState } from "react";
 const AuthContext = React.createContext({
   isLoggedIn: false,
   onLogin: () => {},
@@ -7,3 +8,4 @@ const AuthContext = React.createContext({
 });
 
 export default AuthContext;
+

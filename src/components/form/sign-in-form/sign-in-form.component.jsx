@@ -3,19 +3,16 @@ import { useContext, useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 import AuthContext from '../../../context/auth.context';
-
 import { useNavigate } from "react-router-dom";
-
-
-
 import './sign-in-form.styles.scss';
+import { toast } from 'react-toastify';
 
 const defaultFormFields = {
   email: '',
   password: '',
 };
 
-const SignInForm = () => {
+const SignInForm = ({setIsLogin}) => {
   const {onLogin}=useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -41,13 +38,12 @@ const SignInForm = () => {
     );
   
     if (user) {
-      alert("Login successful");
+      toast.success("Login successful");
       navigate('/');
       onLogin();
     } else {
-      alert("Invalid Credentials");
+      toast.error("Invalid Credentials");
     }
-  
     resetFormFields();
   };
   
@@ -60,8 +56,7 @@ const SignInForm = () => {
 
   return (
     <div className='sign-up-container'>
-      <h2 className='text-xl font-bold'>Already have an account?</h2>
-      <span className='text-xl font-bold '>Sign in with your email and password</span>
+      <span className='text-xl font-bold '>Welcome Back!</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label='Email'
@@ -87,6 +82,9 @@ const SignInForm = () => {
           </Button>
         </div>
       </form>
+      <h2 className='text-xl font-bold cursor-pointer'
+        onClick={()=>setIsLogin((prev)=>!prev)}
+      >Don't have an account? Create here</h2>
     </div>
   );
 };

@@ -5,9 +5,12 @@ import SearchBarSection from "./components/SearchBarSection";
 import { useStore } from "./store";
 
 import AuthContext from "./context/auth.context";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   // useraccounts
+  const notify = () => toast("Wow so easy!");
   useEffect(() => {
   
     const users = JSON.parse(localStorage.getItem("users"));
@@ -49,6 +52,10 @@ function App() {
         </div>
         <hr />
         <AppRoutes query={query}/>
+        <div>
+        {/* <button onClick={notify}>Notify!</button> */}
+        <ToastContainer position="bottom-center" theme="dark" hideProgressBar={true} />
+      </div>
       </AuthContext.Provider>
       
     </div>
