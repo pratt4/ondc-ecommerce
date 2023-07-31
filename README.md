@@ -22,6 +22,11 @@ First clone the project then
 
 `npm run dev`
 
+default login Credentials
+
+email:`test@test.com`
+password:`test`
+
 # For payments
 
 use this test card
